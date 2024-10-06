@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+
 public interface QingFunction {
-    void insert(Node newNode);
+    void insert(ArrayList<Node> children);
+    
     Node remove();
 }

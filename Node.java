@@ -15,9 +15,9 @@ public class Node {
         this.pathCost = pathCost;
     }
     
-    String stateToString(){
-        StringBuilder res= new StringBuilder();
-        for(Stack<String>s:state){
+    String stateToString() {
+        StringBuilder res = new StringBuilder();
+        for (Stack<String> s : state) {
             res.append(s.toString());
         }
         return res.toString();
