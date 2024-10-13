@@ -1,27 +1,25 @@
-package WaterSort;
+package code;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
-public class BFS implements QingFunction {
-    Queue<Node> q = new LinkedList<>();
+public class DFS implements QingFunction {
+    Stack<Node> stack = new Stack<>();
     HashSet<String> visited = new HashSet<>();
     
     public void insert(ArrayList<Node> children) {
+        Collections.reverse(children);
         for (Node child : children) {
             String stateString = child.stateToString();
             if (!visited.contains(stateString)) {
-                q.add(child);
+                stack.push(child);
                 visited.add(child.stateToString());
             }
         }
     }
     
     public Node remove() {
-        if (q.isEmpty()) return null;
-        return q.remove();
+        if (stack.isEmpty()) return null;
+        return stack.pop();
     }
     
 }

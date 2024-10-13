@@ -1,4 +1,4 @@
-package WaterSort;
+package code;
 
 import java.util.ArrayList;
 

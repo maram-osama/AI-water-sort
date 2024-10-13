@@ -1,14 +1,18 @@
-package WaterSort;
+package code;
 
 import java.util.*;
 
-public class GR2 implements QingFunction {
-    PriorityQueue<Node> q = new PriorityQueue<>(Comparator.comparingInt(a -> a.h2));
-    
+public class AS2 implements QingFunction {
+    PriorityQueue<Node> q = new PriorityQueue<>(Comparator.comparingInt(a -> (a.h2+a.pathCost)));
+    HashMap<String,Integer> visited = new HashMap<>();
     public void insert(ArrayList<Node> children) {
         for (Node child : children) {
             heuristicFunction(child);
-            q.add(child);
+            String state = child.stateToString();
+            if(!visited.containsKey(child) || visited.get(state)> child.pathCost + child.h2) {
+                q.add(child);
+                visited.put(state,child.pathCost+ child.h2);
+            }
         }
     }
     
@@ -34,12 +38,12 @@ public class GR2 implements QingFunction {
                 }
                 rev.push(colorOnTop);
             }
-            
+        
             while (!rev.isEmpty()) {
                 s.push(rev.pop());
             }
         }
-        System.out.println("Mismatched layers" + mismatchedLayers);
+      //  System.out.println("Mismatched layers" + mismatchedLayers);
         node.h2= mismatchedLayers;
         return mismatchedLayers;
     }

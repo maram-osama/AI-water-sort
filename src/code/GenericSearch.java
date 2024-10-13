@@ -1,4 +1,4 @@
-package WaterSort;
+package code;
 
 import java.util.*;
 
@@ -16,15 +16,16 @@ public class GenericSearch {
             Node current = qingFunc.remove();
             if (current == null) break;
             numExpansions++;
-            if(numExpansions<50){
-                System.out.println(current.stateToString());
-            }
+//            System.out.println("hi");
+//            if(numExpansions<50){
+//                System.out.println(current.stateToString());
+//            }
             if (isGoal(current)) {
 //                System.out.println("Goal" + current.stateToString());
                 StringBuilder plan = pathToGoal(current);
                 String s = plan.deleteCharAt(plan.length() - 1) + ";" + current.pathCost + ";" + numExpansions;
-                System.out.println("sol" +s);
-                System.out.println(overestimate(current, current.pathCost));
+              //  System.out.println("sol" +s);
+             //   System.out.println(overestimate(current, current.pathCost));
                 return s;
             }
             //    System.out.println(current.stateToString() + "pour_" + Arrays.toString(current.operator));
