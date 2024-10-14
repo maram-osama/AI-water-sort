@@ -4,36 +4,45 @@ import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.ThreadMXBean;
 public class WaterSortSearch extends GenericSearch {
     static String strategy;
+    static String strategyLabel;
     static boolean visualize;
     
     public static String solve(String initialState, String strategy, boolean visualize) {
-        strategy = strategy;
-        visualize = visualize;
+        WaterSortSearch.strategy = strategy;
+        WaterSortSearch.visualize = visualize;
         String result="";
         switch (strategy) {
             case "BF":
                 result = genericSearch(initialState, new BFS());
+                strategyLabel = "Breadth First Search";
                 break;
             case "DF":
                 result = genericSearch(initialState, new DFS());
+                strategyLabel = "Depth First Search";
                 break;
             case "UC":
                 result = genericSearch(initialState, new UCS());
+                strategyLabel = "Uniform Cost Search";
                 break;
             case "ID":
                 result = genericSearch(initialState, new IDS());
+                strategyLabel = "Iterative Deepening Search";
                 break;
             case "GR1":
                 result = genericSearch(initialState, new GR1());
+                strategyLabel = "Greedy with heuristic #1";
                 break;
             case "GR2":
                 result = genericSearch(initialState, new GR2());
+                strategyLabel = "Greedy with heuristic #2";
                 break;
             case "AS1":
                 result = genericSearch(initialState, new AS1());
+                strategyLabel = "A* with heuristic #1";
                 break;
             case "AS2":
                 result = genericSearch(initialState, new AS2());
+                strategyLabel = "A* with heuristic #2";
                 break;
         }
         return result;
@@ -48,17 +57,19 @@ public class WaterSortSearch extends GenericSearch {
         long startCpuTime = threadBean.getCurrentThreadCpuTime();
         Runtime runtime = Runtime.getRuntime();
 
-       // Total memory available to the JVM
         long totalMemory = runtime.freeMemory();
-        String grid0 = "5;4;" + "b,y,r,b;" + "b,y,r,r;" +
+        String init = "5;4;" + "b,y,r,b;" + "b,y,r,r;" +
                 "y,r,b,y;" + "e,e,e,e;" + "e,e,e,e;";
-
-
-
-        double numIterations = 100;
-        for(int i=0;i<numIterations;i++) {
-            solve(grid0, "UC", true);
+    
+        String path = solve(init, "DF", true);
+        System.out.println(path);
+        if(visualize){
+            new GUI(init, path, strategyLabel);
         }
+        double numIterations = 100;
+//        for(int i=0;i<numIterations;i++) {
+//            solve(grid0, "UC", true);
+//        }
 
         // Free memory within the JVM
         long freeMemory = runtime.freeMemory();
