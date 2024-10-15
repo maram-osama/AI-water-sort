@@ -58,10 +58,15 @@ public class WaterSortSearch extends GenericSearch {
         Runtime runtime = Runtime.getRuntime();
 
         long totalMemory = runtime.freeMemory();
-        String init = "5;4;" + "b,y,r,b;" + "b,y,r,r;" +
-                "y,r,b,y;" + "e,e,e,e;" + "e,e,e,e;";
+        String init = "5;" +
+                "4;" +
+                "b,y,r,b;" +
+                "b,y,r,r;" +
+                "y,r,b,y;" +
+                "e,e,e,e;" +
+                "e,e,e,e;";
     
-        String path = solve(init, "DF", true);
+        String path = solve(init, "ID", false);
         System.out.println(path);
         if(visualize){
             new GUI(init, path, strategyLabel);

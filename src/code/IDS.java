@@ -12,6 +12,9 @@ public class IDS implements QingFunction {
     HashSet<String> visited = new HashSet<>();
     
     public void insert(ArrayList<Node> children) {
+        if(children.isEmpty()){
+            return;
+        }
         if (root == null)
             root = children.get(0);
         Collections.reverse(children);
