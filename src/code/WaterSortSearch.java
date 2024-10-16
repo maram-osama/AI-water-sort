@@ -66,7 +66,7 @@ public class WaterSortSearch extends GenericSearch {
                 "e,e,e,e;" +
                 "e,e,e,e;";
     
-        String path = solve(init, "ID", false);
+        String path = solve(init, "ID", true);
         System.out.println(path);
         if(visualize){
             new GUI(init, path, strategyLabel);

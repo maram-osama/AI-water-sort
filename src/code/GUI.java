@@ -14,7 +14,7 @@ public class GUI extends JFrame {
     private int numExpansions;
     private JLabel stepLabel;
     private int stepCounter = 0;
-    private JLabel strategyLabel;
+    private JLabel stepInfoLabel;
     
     public GUI(String init, String path, String strategy) {
         setTitle("Water Sort Visualization");
@@ -37,7 +37,13 @@ public class GUI extends JFrame {
         stepLabel.setBackground(new Color(173, 216, 230));
         stepLabel.setOpaque(true);
     
-        strategyLabel = new JLabel("Strategy: "+ strategy, SwingConstants.CENTER);
+        stepInfoLabel = new JLabel("", SwingConstants.CENTER);
+        stepInfoLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        stepInfoLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        stepInfoLabel.setBackground(new Color(173, 216, 230));
+        stepInfoLabel.setOpaque(true);
+    
+        JLabel strategyLabel = new JLabel("Strategy: " + strategy, SwingConstants.CENTER);
         strategyLabel.setFont(new Font("Arial", Font.BOLD, 18));
         strategyLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         strategyLabel.setBackground(new Color(173, 216, 230));
@@ -70,12 +76,14 @@ public class GUI extends JFrame {
                     performNextStep(pours.poll());
                 } else {
                     JOptionPane.showMessageDialog(null, "You won! \nPath cost: " + pathCost + "\nNumber of expansions: "+ numExpansions);
+                    dispose();
                 }
             }
         });
         
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel(new GridLayout(2,1));
         buttonPanel.setBackground(new Color(240, 240, 240));
+        buttonPanel.add(stepInfoLabel);
         buttonPanel.add(nextButton);
         
         add(topPanel, BorderLayout.NORTH);
@@ -139,6 +147,8 @@ public class GUI extends JFrame {
         
         int fromLayer = findTopLayer(from);
         if (fromLayer == -1) return;
+    
+        stepInfoLabel.setText("From bottle " + from + " to bottle " + to);
         
         String colorToPour = bottleState[from][fromLayer];
         
