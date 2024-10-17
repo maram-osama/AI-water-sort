@@ -7,7 +7,6 @@ public class UCS implements QingFunction {
     HashMap<String,Integer> visited = new HashMap<>();
     
     public void insert(ArrayList<Node> children) {
-        // TODO: Ask TA about visited in UCS
         for (Node child : children) {
             String stateString = child.stateToString();
             if (!visited.containsKey(stateString) || visited.get(stateString)> child.pathCost) {
@@ -15,7 +14,6 @@ public class UCS implements QingFunction {
                 visited.put(child.stateToString(), child.pathCost);
             }
         }
-        q.addAll(children);
     }
     
     public Node remove() {
