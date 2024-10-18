@@ -45,6 +45,9 @@ public class WaterSortSearch extends GenericSearch {
                 strategyLabel = "A* with heuristic #2";
                 break;
         }
+        if(visualize){
+            new GUI(initialState, result, strategyLabel);
+        }
         return result;
     }
     
@@ -58,18 +61,24 @@ public class WaterSortSearch extends GenericSearch {
         Runtime runtime = Runtime.getRuntime();
 
         long totalMemory = runtime.freeMemory();
-        String init = "2;" +
+//        String init = "5;" + //grid1
+//                "4;" +
+//                "b,y,r,b;" +
+//                "b,y,r,r;" +
+//                "y,r,b,y;" +
+//                "e,e,e,e;" +
+//                "e,e,e,e;";
+        String init = "3;" + //grid4
                 "3;" +
+                "r,r,y;" +
                 "b,y,r;" +
-                "b,y,r;" +
-                "y,r,b;";
-    
-        String path = solve(init, "UC", false);
+                "y,b,g;";
+        String path = solve(init, "AS2", true);
         System.out.println("SOLUTION: "+ path);
       //  System.out.println(path);
-        if(visualize){
-            new GUI(init, path, strategyLabel);
-        }
+//        if(visualize){
+//            new GUI(init, path, strategyLabel);
+//        }
         double numIterations = 100;
 //        for(int i=0;i<numIterations;i++) {
 //            solve(grid0, "UC", true);
